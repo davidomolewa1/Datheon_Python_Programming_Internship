@@ -77,8 +77,9 @@ stages = [
     """
 ]
 
-# List of secret words
-eng_word = ["Sugar", "Milk", "Milo","Teat"]
+# Load secret english words from the text file
+with open("google-10000-english-no-swears.txt", "r", encoding="utf-8") as f:
+    eng_word = [line.strip() for line in f if line.strip()]
 
 # Ramdomly select a secret word from the list
 secret_word = rand.choice(eng_word).lower()
