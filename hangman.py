@@ -1,4 +1,82 @@
 import random as rand
+
+# The 7 stages of ASCII art (from index 0 to 6)
+# Position 0 means 6 tries left (empty gallows)
+# Position 6 means 0 tries left (game over)
+stages = [
+    """
+       +---+
+
+       |   |
+           |
+           |
+           |
+           |
+     =========
+    """,
+    """
+       +---+
+
+       |   |
+       O   |
+           |
+           |
+           |
+     =========
+    """,
+    """
+       +---+
+
+       |   |
+       O   |
+
+       |   |
+           |
+           |
+     =========
+    """,
+    """
+       +---+
+
+       |   |
+       O   |
+      /|   |
+           |
+           |
+     =========
+    """,
+    """
+       +---+
+
+       |   |
+       O   |
+      /|\\  |
+           |
+           |
+     =========
+    """,
+    """
+       +---+
+
+       |   |
+       O   |
+      /|\\  |
+      /    |
+           |
+     =========
+    """,
+    """
+       +---+
+
+       |   |
+       O   |
+      /|\\  |
+      / \\  |
+           |
+     =========
+    """
+]
+
 # List of secret words
 eng_word = ["Sugar", "Milk", "Milo","Teat"]
 
@@ -14,6 +92,7 @@ incorrect_guess = 6
 
 # Welcome display notes
 print("WELCOME TO HANGMAN WORD GUESSING GAME")
+print(stages[0])
 print("HERE IS A HINT TO THE NUMBER OF WORDS")
 print(" ".join(hidden_list))
 print(secret_word)
@@ -21,7 +100,7 @@ print(secret_word)
 # Keep the game running as long as they have tries left and the dashes are remaining
 while incorrect_guess > 0 and "-" in hidden_list:
     # User input
-    guess = input("Enter a letter: ").lower()
+    guess = input("\nEnter a letter: ").lower()
     
     # Handling multiple letter entries at once or not numeric value
     if len(guess) != 1 or not guess.isalpha():
@@ -57,6 +136,10 @@ while incorrect_guess > 0 and "-" in hidden_list:
         else:
             print("You have zero tries left")
     
+    # Calculate which art pahse to print
+    current_stage_index = 6 - incorrect_guess
+    print(stages[current_stage_index])
+
     # Show status updates to the players
     word_progress = " ".join(hidden_list)
     guesses_made = " ".join(guessed_letters)
@@ -65,7 +148,7 @@ while incorrect_guess > 0 and "-" in hidden_list:
 
 # Game result
 if "-" not in hidden_list:
-    print("You win! you revealed all the words correctly")
+    print("\nYou win! you revealed all the words correctly")
 else:
-    print(f"You lose!, Game Over!.The secret word was: '{secret_word}'")
+    print(f"\nYou lose!, Game Over!.The secret word was: '{secret_word}'")
 
