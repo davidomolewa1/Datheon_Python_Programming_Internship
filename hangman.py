@@ -93,7 +93,7 @@ incorrect_guess = 6
 # Welcome display notes
 print("WELCOME TO HANGMAN WORD GUESSING GAME")
 print(stages[0])
-print("HERE IS A HINT TO THE NUMBER OF WORDS")
+print("HERE IS A HINT TO THE NUMBER OF WORDS 😉")
 print(" ".join(hidden_list))
 print(secret_word)
 
@@ -104,7 +104,7 @@ while incorrect_guess > 0 and "-" in hidden_list:
     
     # Handling multiple letter entries at once or not numeric value
     if len(guess) != 1 or not guess.isalpha():
-        print("You can only enter a single letter")
+        print("You can only enter a single letter 🙃")
         continue
     
     # Collect all valid hidden index positions for the input letter using a loop
@@ -115,8 +115,8 @@ while incorrect_guess > 0 and "-" in hidden_list:
 
     # History check to see if input word has been guessed before and no hidden copies left
     if guess in guessed_letters and not matching_indices:
-        print(f"You already fully tried '{guess}'! It is either wrong or completely revealed")
-        print(f"Letters tried so far {", ".join(guessed_letters)}")
+        print(f"⏹️ You already fully tried '{guess}'! It is either wrong or completely revealed")
+        print(f"📋 Letters tried so far {", ".join(guessed_letters)}")
 
     # Record the letter if it is the first time that they typed it
     if guess not in guessed_letters:
@@ -127,28 +127,27 @@ while incorrect_guess > 0 and "-" in hidden_list:
         # pick a random position out of remaining duplicates
         chosen_index = rand.choice(matching_indices)
         hidden_list[chosen_index] = guess
-        print(f"Good guess! A '{guess}' was revealed")
+        print(f"Good guess! 👍 A '{guess}' was revealed")
     else:
         # Penalty if word not in secret words or fully revealed
         incorrect_guess -= 1
         if incorrect_guess > 0:
-            print(f"Incorrect or already fully revealed! You have {incorrect_guess} guess left")
+            print(f"❌ Incorrect or already fully revealed! You have {incorrect_guess} guess left")
         else:
-            print("You have zero tries left")
+            print("You have zero tries left 🙅‍♂️")
     
-    # Calculate which art pahse to print
+    # Calculate which art phase to print
     current_stage_index = 6 - incorrect_guess
     print(stages[current_stage_index])
 
     # Show status updates to the players
     word_progress = " ".join(hidden_list)
     guesses_made = " ".join(guessed_letters)
-    print("Word progress: ", word_progress)
-    print("All guesses made: ", guesses_made)
+    print("🔄 Word progress: ", word_progress)
+    print("📋 All guesses made: ", guesses_made)
 
 # Game result
 if "-" not in hidden_list:
-    print("\nYou win! you revealed all the words correctly")
+    print("\n🎉 You win! you revealed all the words correctly")
 else:
-    print(f"\nYou lose!, Game Over!.The secret word was: '{secret_word}'")
-
+    print(f"\n💀 You lose!, Game Over!.The secret word was: '{secret_word}'")
