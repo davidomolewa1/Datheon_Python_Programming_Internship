@@ -96,7 +96,6 @@ print("WELCOME TO HANGMAN WORD GUESSING GAME")
 print(stages[0])
 print("HERE IS A HINT TO THE NUMBER OF WORDS 😉")
 print(" ".join(hidden_list))
-print(secret_word)
 
 # Keep the game running as long as they have tries left and the dashes are remaining
 while incorrect_guess > 0 and "-" in hidden_list:
