@@ -1,22 +1,25 @@
+import re
+
 # Function to match message itent
 def match_intent(clean_input):
-    # Defined keyword lists for different intents
-    hours_keywords = ['hours', 'open', 'close', 'time', 'timing']
-    return_keywords = ['return', 'refund', 'exchange', 'policy']
-    product_keywords = ['laptop', 'phone', 'tv', 'sell', 'buy', 'device', 'stock']
-    support_keywords = ['contact', 'support', 'help', 'call', 'email', 'agent']
+    # Redefining to use regular expression setting boundaries to ensure matching whole words only
+    hours_pattern = r'\b(hours|open|close|time|timing|when)\b'
+    return_pattern = r'\b(return|refund|exchange|policy)\b'
+    product_pattern = r'\b(laptop|phone|tv|sell|buy|device|stock|android|apple|macbook|iphone)\b'
+    support_pattern = r'\b(contact|support|help|call|email|agent|phone number)\b'
 
-    # Using any() to check if at least one keyword matches the user's input
-    if any(keyword in clean_input for keyword in hours_keywords):
+    # Using re.search to return a match object if found, or None if not found
+    # Using re.IGNORECASE as an extra layer of safety
+    if re.search(hours_pattern, clean_input, re.IGNORECASE):
         return "TechStore: We are open Monday to Friday from 9:00 AM to 6:00 PM, and Saturdays from 10:00 AM to 4:00 PM. We are closed on Sundays."
         
-    elif any(keyword in clean_input for keyword in return_keywords):
+    elif re.search(return_pattern, clean_input, re.IGNORECASE):
         return "TechStore: You can return any item within 30 days of purchase for a full refund. Items must be in their original packaging."
         
-    elif any(keyword in clean_input for keyword in product_keywords):
+    elif re.search(product_pattern, clean_input, re.IGNORECASE):
         return "TechStore: Yes, we sell a wide range of electronics including laptops, smartphones, and smart TVs! What specific device are you looking for?"
         
-    elif any(keyword in clean_input for keyword in support_keywords):
+    elif re.search(support_pattern, clean_input, re.IGNORECASE):
         return "TechStore: You can reach our support team via email at support@techstore.com or call us at 1-800-555-TECH."
         
     else:
