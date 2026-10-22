@@ -40,8 +40,10 @@ def match_intent(clean_input):
 # basic test
 def start_chatbot():
     # Bot Welcome message
+    print("============================================================================")
     print("Welcome to TechStore Support Assistant!")
-    print("Type 'help' to see what I can do, or 'exit' to quit.\n")
+    print("Type your question below or 'help' to see what I can do, or 'exit' to quit.")
+    print("============================================================================")
     
     # Conversation loop
     while True:
