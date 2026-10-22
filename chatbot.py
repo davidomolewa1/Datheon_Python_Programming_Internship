@@ -2,6 +2,7 @@ import re
 
 # Centralized knowledge base to update answers
 knowledge_base = {
+    "greetings": "TechStore: Hello! Welcome to TechStore Customer Support. How can I help you today?",
     "hours": "TechStore: We are open Monday to Friday from 9:00 AM to 6:00 PM, and Saturdays from 10:00 AM to 4:00 PM. We are closed on Sundays.",
     "returns": "TechStore: You can return any item within 30 days of purchase for a full refund. Items must be in their original packaging.",
     "products": "TechStore: Yes, we sell a wide range of electronics including laptops, smartphones, and smart TVs! What specific device are you looking for?",
@@ -12,6 +13,7 @@ knowledge_base = {
 # Function to match message itent
 def match_intent(clean_input):
     # Redefining to use regular expression setting boundaries to ensure matching whole words only
+    greeting_pattern = r'\b(hi|hello|hey|greetings|good morning|good afternoon|good day|yo)\b'
     hours_pattern = r'\b(hours|open|close|time|timing|when)\b'
     return_pattern = r'\b(return|refund|exchange|policy)\b'
     product_pattern = r'\b(laptop|phone|tv|sell|buy|device|stock|android|apple|macbook|iphone)\b'
@@ -19,7 +21,9 @@ def match_intent(clean_input):
 
     # Using re.search to return a match object if found, or None if not found
     # Using re.IGNORECASE as an extra layer of safety
-    if re.search(hours_pattern, clean_input, re.IGNORECASE):
+    if re.search(greeting_pattern, clean_input, re.IGNORECASE):
+        intent_key = "greetings"
+    elif re.search(hours_pattern, clean_input, re.IGNORECASE):
         intent_key = "hours"
     elif re.search(return_pattern, clean_input, re.IGNORECASE):
         intent_key = "returns"
